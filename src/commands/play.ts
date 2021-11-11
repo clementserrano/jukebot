@@ -25,13 +25,10 @@ const command: Command = {
                 guildId: member.guild.id,
                 adapterCreator: member.guild.voiceAdapterCreator
             })
-            if(connection && connection !== joinedConnection){
-                connection.disconnect();
-                connection = null;
-            }
+            // If new connection, wait for VoiceConnectionStatus.Ready
             if (!connection) {
                 connection = joinedConnection;
-                connection.on(VoiceConnectionStatus.Ready, async () => {
+                connection.once(VoiceConnectionStatus.Ready, async () => {
                     await playAudio();
                 });
             } else {
@@ -40,7 +37,7 @@ const command: Command = {
         } else if (connection) {
             await playAudio();
         } else {
-            interaction.reply({ content: `You must be in a channel to start the JAM`, ephemeral: true });
+            await interaction.reply({ content: `You must be in a channel to start the JAM 🎶 YOU STOOPID 🤪`, ephemeral: true });
         }
 
         async function playAudio() {
@@ -50,7 +47,7 @@ const command: Command = {
             const readable = await context.youtubeApi.streamMP3(url);
             const resource = createAudioResource(readable);
             player.play(resource);
-            interaction.reply(`Playing music "${title}"`);
+            await interaction.reply(`Playing music ▶ "${title}"🎵`);
         }
     },
 };

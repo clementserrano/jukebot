@@ -45,8 +45,13 @@ export class Discord {
                     .catch(console.error);
             })
 
-            // Init context
+            // Init player
             this.player = createAudioPlayer();
+            this.player.on('error', error => {
+                console.error(error);
+            });
+
+            // Init youtube API
             this.youtubeApi = new YoutubeClient();
 
             // Handle commands executions
@@ -58,7 +63,7 @@ export class Discord {
                     await command.execute(interaction, this);
                 } catch (error) {
                     console.error(error);
-                    await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+                    await interaction.reply({ content: 'There was an error while executing this command! 😨', ephemeral: false });
                 }
             });
         })
