@@ -26,9 +26,19 @@
   "dependencies": {
     "@discordjs/builders": "^0.8.2",
     "@discordjs/opus": "^0.6.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "@discordjs/voice": "^0.7.2",
+    "discord-api-types": "^0.20.2",
     "discord.js": "^13.3.1",
+    "ffmpeg": "^0.0.4",
+    "ffmpeg-static": "^4.4.0",
     "file-system": "^2.2.2",
+    "libsodium-wrappers": "^0.7.9",
+    "opusscript": "^0.0.8",
     "spotify-web-api-node": "^5.0.2",
-    "youtube-api": "^3.0.1"
+    "youtube.ts": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6"
   }
 }

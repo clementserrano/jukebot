@@ -1,3 +1,3 @@
 import { Discord } from './api/discord';
 
-Discord.init();
+const discord = new Discord();
