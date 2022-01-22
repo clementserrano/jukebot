@@ -1,5 +1,5 @@
 import { REST } from "@discordjs/rest";
-import { AudioPlayer, createAudioPlayer } from "@discordjs/voice";
+import { AudioPlayer, createAudioPlayer, NoSubscriberBehavior } from "@discordjs/voice";
 import { Routes } from "discord-api-types/rest/v9";
 import { ApplicationCommandDataResolvable, Client, Intents } from "discord.js";
 import * as fs from 'file-system';
@@ -14,7 +14,7 @@ export class Discord {
     youtubeApi: YoutubeClient;
 
     constructor() {
-        this.bot = new Client({ intents: [Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
+        this.bot = new Client({ intents: [Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_PRESENCES] });
         // Init bot
         this.bot.login(secrets.discord.key).catch(err => console.error(err))
         this.bot.once("ready", async () => {
@@ -46,7 +46,7 @@ export class Discord {
             })
 
             // Init player
-            this.player = createAudioPlayer();
+            this.player = createAudioPlayer({ debug: true, behaviors: { noSubscriber: NoSubscriberBehavior.Stop } });
             this.player.on('error', error => {
                 console.error(error);
             });

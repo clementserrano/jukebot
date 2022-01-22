@@ -1,19 +1,15 @@
 import { Readable } from "stream";
-import Youtube from "youtube.ts";
-import secrets from '../../secrets.json';
-export class YoutubeClient {
-    private youtube: Youtube;
-    
+import ytdl from "ytdl-core";
+export class YoutubeClient {    
     constructor() {
-        this.youtube = new Youtube(secrets.youtube.key);
     }
 
     public async getTitle(url: string): Promise<string> {
-        return this.youtube.util.getTitle(url);
+        return (await ytdl.getInfo(url)).videoDetails.title;
     }
 
     public async streamMP3(url: string): Promise<Readable> {
-        return this.youtube.util.streamMP3(url);
+        return ytdl(url, {filter: "audioonly"});
     }
 
     public isYoutubeLink(url: string){

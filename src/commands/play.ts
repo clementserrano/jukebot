@@ -23,7 +23,7 @@ const command: Command = {
             const joinedConnection = joinVoiceChannel({
                 channelId: channelId,
                 guildId: member.guild.id,
-                adapterCreator: member.guild.voiceAdapterCreator
+                adapterCreator: <any>member.guild.voiceAdapterCreator
             })
             // If new connection, wait for VoiceConnectionStatus.Ready
             if (!connection) {
