@@ -9,7 +9,7 @@ export class YoutubeClient {
     }
 
     public async streamMP3(url: string): Promise<Readable> {
-        return ytdl(url, {filter: "audioonly"});
+        return ytdl(url, {filter: "audioonly", highWaterMark: 1 << 25});
     }
 
     public isYoutubeLink(url: string){

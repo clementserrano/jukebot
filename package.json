@@ -34,6 +34,7 @@
     "ffmpeg-static": "^4.4.1",
     "file-system": "^2.2.2",
     "libsodium-wrappers": "^0.7.9",
+    "node": "^14.18.3",
     "opusscript": "^0.0.8",
     "spotify-web-api-node": "^5.0.2",
     "ytdl-core": "^4.10.0"
