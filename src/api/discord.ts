@@ -48,6 +48,7 @@ export class Discord {
             // Init player
             this.player = createAudioPlayer({ debug: true, behaviors: { noSubscriber: NoSubscriberBehavior.Stop } });
             this.player.on('error', error => {
+                console.error('The player connection encountered an error:' + error.message)
                 console.error(error);
             });
 
@@ -70,6 +71,7 @@ export class Discord {
 
         this.bot.on('error', error => {
             console.error('The websocket connection encountered an error:' + error.message)
+            console.error(error);
         });
     }
 }

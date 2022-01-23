@@ -1,5 +1,6 @@
 import { Readable } from "stream";
 import ytdl from "ytdl-core";
+import secrets from "../../secrets.json";
 export class YoutubeClient {    
     constructor() {
     }
@@ -9,7 +10,11 @@ export class YoutubeClient {
     }
 
     public async streamMP3(url: string): Promise<Readable> {
-        return ytdl(url, {filter: "audioonly", highWaterMark: 1 << 25});
+        return ytdl(url, {filter: "audioonly", quality: 'lowestaudio', requestOptions: {
+            headers: {
+              cookie: secrets.youtube,
+            },
+          }, highWaterMark: 1 << 25});
     }
 
     public isYoutubeLink(url: string){
